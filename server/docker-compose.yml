@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-snappchat
+    environment:
+      POSTGRES_USER: amin
+      POSTGRES_PASSWORD: amin1234
+      POSTGRES_DB: snappchat
+    ports:
+      - "5431:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  nats:
+    image: nats:latest
+    container_name: nats-server
+    ports:
+      - "4222:4222"
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: snappchat-server
+    depends_on:
+      - postgres
+      - nats
+    ports:
+      - "8080:8080"
+    environment:
+      CONFIG_FILE: /app/config.json
+      DB_HOST: postgres-snappchat
+      DB_PORT: 5432
+      DB_USER: amin
+      DB_PASSWORD: amin1234
+      DB_NAME: snappchat
+      NATS_HOST: nats-server
+      NATS_PORT: 4222
+    volumes:
+      - ./config.json:/app/config.json
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
