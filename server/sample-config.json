@@ -1,0 +1,16 @@
+{
+  "server": {
+    "httpPort": 8080
+  },
+  "nats": {
+    "hostPort": "4222"
+  },
+  "db": {
+    "host": "localhost",
+    "port": 5431,
+    "database": "snappchat",
+    "schema": "public",
+    "user": "amin",
+    "password": "amin1234"
+  }
+}

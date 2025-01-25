@@ -1,6 +1,11 @@
 package postgres
 
-import "fmt"
+import (
+	"fmt"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+)
 
 type DBConnOptions struct {
 	User   string

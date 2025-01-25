@@ -6,5 +6,5 @@ import (
 )
 
 type ChatRepo interface {
-	Create(ctx context.Context, chat domain.Chat)
+	Create(ctx context.Context, chat domain.Chat) error
 }

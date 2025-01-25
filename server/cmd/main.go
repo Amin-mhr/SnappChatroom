@@ -1,6 +1,7 @@
 package main
 
 import (
+	ws "SnappChatroom/api/handlers/websocket"
 	"SnappChatroom/app"
 	"SnappChatroom/config"
 	"flag"
@@ -21,5 +22,5 @@ func main() {
 
 	appContainer := app.NewMustApp(c)
 
-	log.Fatal(http.Run(appContainer, c.Server))
+	log.Fatal(ws.Run(appContainer, c.Server))
 }

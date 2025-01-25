@@ -14,5 +14,7 @@ func Run(appContainer app.App, cfg config.ServerConfig) error {
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		fmt.Println("Error starting server:", err)
+		return err
 	}
+	return nil
 }
